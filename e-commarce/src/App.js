@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import Contact from "./Pages/Contact";
+import PageNotFound from "./Pages/PageNotFound";
+import Glasses from "./Pages/Glasses";
+import Fitness from "./Pages/Fitness";
+import Register from "./Pages/Auth/Register";
+import Login from "./Pages/Auth/Login";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/Glasses" element={<Glasses />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/Fitness" element={<Fitness />} />
+      <Route path="/Signin" element={<Login />} />
+      <Route path="/Signup" element={<Register/>} />
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
   );
 }
 
