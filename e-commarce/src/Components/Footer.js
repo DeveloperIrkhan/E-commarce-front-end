@@ -9,7 +9,7 @@ const Footer = () => {
         <Link to="/"> E-commarce WebApp</Link>
       </div>
       <div className="container">
-        <div className="footer-links w-50 m-auto d-flex justify-content-around align-items-center">
+        <div className="footer-links p-3 w-50 m-auto d-flex justify-content-around align-items-center">
           <NavLink to="/Contact-us" className="footer-links">Contact Us</NavLink>
           <NavLink to="/About-us" className="footer-links">About Us</NavLink>
           <NavLink to="/Privacy" className="footer-links">Privacy Policy</NavLink>

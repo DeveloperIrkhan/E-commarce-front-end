@@ -55,8 +55,8 @@ const Register = () => {
               className="flex-column col-lg-6 col-12"
               onSubmit={HandleSubmit}
             >
-              <div className="row">
-                <h3>Register</h3>
+              <div className="row mb-5">
+                <h3 className="div-heading">Signup</h3>
               </div>
               <div className="form-group my-2">
                 <label htmlFor="firstName">FirstName</label>
@@ -146,7 +146,7 @@ const Register = () => {
                   placeholder="password"
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary w-25">
                 Submit
               </button>
             </form>

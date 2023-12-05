@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink,useNavigate  } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import Spinner from "./Spinner";
 import toast from 'react-hot-toast'
@@ -9,6 +9,7 @@ const Header = () => {
   //   header.classList.toggle("sticky", window.scrollY > 0)
   //   console.log(header)
   // })
+  const navigate = useNavigate();
   const [auth, setauth] = useAuth();
   const [loading, setloading] = useState(false);
   const handleLogout = () => {
@@ -19,6 +20,7 @@ const Header = () => {
       token: "",
     });
     localStorage.removeItem("auth");
+    navigate("/");
     setTimeout(() => {
       setloading(false);
     }, 1000);
@@ -151,14 +153,23 @@ const Header = () => {
                           </li>
                         </>
                       ) : (
+                       <>
                         <li>
-                          <NavLink
+                          <Link to="/dashboard"
+                            className="dropdown-item"
+                          >
+                            Dashboard
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
                             onClick={handleLogout}
                             className="dropdown-item"
                           >
                             Signout
-                          </NavLink>
+                          </Link>
                         </li>
+                       </>
                       )}
                     </ul>
                   </li>

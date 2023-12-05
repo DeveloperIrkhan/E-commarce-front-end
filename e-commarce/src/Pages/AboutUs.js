@@ -1,14 +1,14 @@
 import React from "react";
 import Layout from "../Components/Layout";
 
-const Contact = () => {
+const AboutUs = () => {
   return (
-    <Layout title={"Contact us | E-Bazar"} >
+    <Layout>
       <div className="container">
-        <h2 className="div-heading">Contact us</h2>
+        <h2 className="div-heading">About Us</h2>
       </div>
     </Layout>
   );
 };
 
-export default Contact;
+export default AboutUs;

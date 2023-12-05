@@ -32,16 +32,29 @@ a {
   color: var(--buttonColor);
   text-decoration: none;
 }
-.page-footer a:hover{
+.page-footer a:hover {
   color: var(--whiteShedColor);
 }
-.footer-links  {
-  color: var(--whiteShedColor)!important;
+.footer-links {
+  color: var(--whiteShedColor) !important;
   transition: 0.3s ease-in-out;
 }
 .footer-links :hover {
-  color: var(--buttonColor)!important;
+  color: var(--buttonColor) !important;
 }
+.div-heading {
+  padding: 0px 10px 10px 10px;
+  float: left;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  border-bottom: solid 2px var(--buttonColor);
+  font-family: "Roboto", sans-serif;
+  /* font-family: "Satisfy", cursive; */
+}
+
 /* ============================================
 ================Spinner CSS================== */
 .spinner-container {
@@ -74,7 +87,7 @@ a {
   color: var(--buttonColor);
   font-size: 30px !important;
   transition: 0.3s all;
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
   /* font-family: "Satisfy", cursive; */
 }
 .logo-text:hover {
@@ -103,15 +116,28 @@ a {
   /* font-family: "Satisfy", cursive; */
   box-shadow: 1px 0.5px 10px #2b303a;
 }
+.dropdown-menu{
+  position: absolute;
+  left: -20px!important;
+}
 .nav-link {
   color: var(--hoverColor);
   font-weight: 500;
   position: relative;
   letter-spacing: 1px;
 }
-.btn-primary{
-  background-color: var(--buttonColor)!important;
-  border: 1px solid var(--buttonColor)!important;
+.dropdown-menu li {
+  letter-spacing: 2px;
+  transition: 0.3s;
+}
+.dropdown-menu li :hover {
+  color: var(--hoverColor) !important;
+  font-weight: 600!important;
+  letter-spacing: 2px;
+}
+.btn-primary {
+  background-color: var(--buttonColor) !important;
+  border: 1px solid var(--buttonColor) !important;
 }
 .nav-link:hover,
 .nav-link.active {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../Components/Layout";
 import Spinner from "../../Components/Spinner";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import {
   api_endpoint,
@@ -15,6 +15,7 @@ const Login = () => {
   const [Password, setPassword] = useState("");
   const [auth, setauth] = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const HandleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -32,11 +33,11 @@ const Login = () => {
         });
         localStorage.setItem('auth',JSON.stringify(resp.data))
         toast.success(resp.data && resp.data.message);
-        navigate("/");
+        navigate(location.state || "/");
       } else {
         setLoading(false);
       }
-      toast.error(resp.data.message);
+      toast.success(resp.data.message);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -53,8 +54,8 @@ const Login = () => {
               className="flex-column col-lg-6 col-12"
               onSubmit={HandleSubmit}
             >
-              <div className="row">
-                <h3>Login</h3>
+              <div className="row mb-5">
+                <h3 className="div-heading">Login</h3>
               </div>
               <div className="form-group my-2">
                 <label htmlFor="email">Email Address</label>
@@ -86,7 +87,7 @@ const Login = () => {
                   placeholder="Password"
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary w-25">
                 Login
               </button>
             </form>

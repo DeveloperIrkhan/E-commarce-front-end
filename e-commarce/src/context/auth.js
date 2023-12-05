@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, createContext } from "react";
-
+import axios from "axios";
 //creating context var
 const authContext = createContext();
 // to accecss setauth and auth for anywhere in application
@@ -9,6 +9,11 @@ const AuthProvider = ({ children }) => {
     user: null,
     token: "",
   });
+
+  // default headers setting
+   axios.defaults.headers.common["Authorization"] = auth?.token;
+
+  // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
   useEffect(() => {
     const data = localStorage.getItem("auth");
     if (data) {
@@ -19,7 +24,8 @@ const AuthProvider = ({ children }) => {
         token: parseData.token,
       });
     }
-  }, [auth]);
+    //eslint-disable-next-line
+  }, []);
   return (
     <authContext.Provider value={[auth, setauth]}>
       {children}
