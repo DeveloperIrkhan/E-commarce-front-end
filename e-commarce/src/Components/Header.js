@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { Link, NavLink,useNavigate  } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import Spinner from "./Spinner";
-import toast from 'react-hot-toast'
+import toast from "react-hot-toast";
 const Header = () => {
   // window.addEventListener("scroll",()=>{
   //   var header = document.querySelector("navbar");
   //   header.classList.toggle("sticky", window.scrollY > 0)
   //   console.log(header)
   // })
-  const navigate = useNavigate();
   const [auth, setauth] = useAuth();
   const [loading, setloading] = useState(false);
+  const navigate = useNavigate();
   const handleLogout = () => {
+    navigate('/')
     setloading(true);
     setauth({
       ...auth,
@@ -20,11 +21,10 @@ const Header = () => {
       token: "",
     });
     localStorage.removeItem("auth");
-    navigate("/");
     setTimeout(() => {
       setloading(false);
     }, 1000);
-    toast.success('user logout successfully')
+    toast.success("user logout successfully");
   };
   return (
     <>
@@ -33,7 +33,7 @@ const Header = () => {
         <nav className="navbar bg-body-tertiary navbar-expand-lg">
           <div className="container-fluid">
             <NavLink to="/" className="navbar-brand d-flex flex-row">
-              <img className="img-fluid logo" src="./Imgs/E-shop.png" />
+              <img className="img-fluid logo" src="../../Imgs/E-shop.png" />
               <span className="logo-text d-flex align-items-center p-3">
                 E-Bazar
               </span>
@@ -73,17 +73,17 @@ const Header = () => {
                       className="nav-link mx-lg-2"
                       aria-current="page"
                     >
-                      Home
+                      <i className="fa-solid fa-house"></i> Home
                     </NavLink>
                   </li>
                   <li className="nav-item">
                     <NavLink to="/Fitness" className="nav-link mx-lg-2">
-                      Fitness
+                      <i className="fa-solid fa-dumbbell"></i> Fitness
                     </NavLink>
                   </li>
                   <li className="nav-item">
                     <NavLink to="/Glasses" className="nav-link mx-lg-2">
-                      Glasses
+                      <i className="fa-solid fa-glasses"></i> Glasses
                     </NavLink>
                   </li>
 
@@ -94,7 +94,7 @@ const Header = () => {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Wallets
+                      <i className="fa-solid fa-wallet"></i> Wallets
                     </a>
                     <ul className="dropdown-menu">
                       <li>
@@ -112,7 +112,7 @@ const Header = () => {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Electronics
+                      <i className="fa-solid fa-plug-circle-xmark"></i> Electronics
                     </a>
                     <ul className="dropdown-menu">
                       <li>
@@ -127,49 +127,56 @@ const Header = () => {
                     </ul>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link">More</a>
+                    <Link className="nav-link">
+                      <i className="fa-solid fa-cart-shopping"></i> Cart (0)
+                    </Link>
                   </li>
                   <li className="nav-item dropdown">
-                    <a
+                    <Link
                       className="nav-link dropdown-toggle mx-lg-3"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Profile
-                    </a>
+                      {auth?.user?.name ? auth?.user?.name : "Profile"}
+                    </Link>
                     <ul className="dropdown-menu">
                       {!auth.user ? (
                         <>
                           <li>
                             <Link to="/Signin" className="dropdown-item">
+                              <i className="fa-solid fa-right-to-bracket"></i>{" "}
                               Signin
                             </Link>
                           </li>
                           <li>
                             <Link to="/Signup" className="dropdown-item">
-                              Signup
+                              <i className="fa-solid fa-user-plus"></i> Signup
                             </Link>
                           </li>
                         </>
                       ) : (
-                       <>
-                        <li>
-                          <Link to="/dashboard"
-                            className="dropdown-item"
-                          >
-                            Dashboard
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            onClick={handleLogout}
-                            className="dropdown-item"
-                          >
-                            Signout
-                          </Link>
-                        </li>
-                       </>
+                        <>
+                          <li>
+                            <Link
+                              to={`/dashboard/${
+                                auth?.user?.role === 1 ? "admin" : "user"
+                              }`}  
+                              className="dropdown-item"
+                            >
+                              <i className="fa-solid fa-gear"></i> Dashboard
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              onClick={handleLogout}
+                              className="dropdown-item"
+                            >
+                              <i className="fa-solid fa-arrow-right-to-bracket"></i>{" "}
+                              Signout
+                            </Link>
+                          </li>
+                        </>
                       )}
                     </ul>
                   </li>

@@ -15,6 +15,7 @@ const Register = () => {
   const [phoneNumber, setphoneNumber] = useState("");
   const [address, setaddress] = useState("");
   const [email, setemail] = useState("");
+  const [answer, setanswer] = useState("");
   const [password, setpassword] = useState("");
 
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const Register = () => {
         password,
         address,
         phoneNumber,
+        answer,
       });
       if (resp && resp.data.success) {
         setLoading(false);
@@ -144,6 +146,21 @@ const Register = () => {
                     setpassword(e.target.value);
                   }}
                   placeholder="password"
+                />
+              </div>
+              <div className="form-group my-2">
+                <label htmlFor="answer">Security Question (What is your First School Name?)</label>
+                <b className="text-danger">*</b>
+                <input
+                  type="text"
+                  value={answer}
+                  className="form-control"
+                  id="answer"
+                  required
+                  onChange={(e) => {
+                    setanswer(e.target.value);
+                  }}
+                  placeholder="Answer the Question"
                 />
               </div>
               <button type="submit" className="btn btn-primary w-25">

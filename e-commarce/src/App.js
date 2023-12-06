@@ -9,16 +9,27 @@ import Glasses from "./Pages/Glasses";
 import Fitness from "./Pages/Fitness";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
-import Privateroute from "./Components/Routes/Privateroute";
+import Userroute from "./Components/Routes/Userroute";
+import Adminroute from "./Components/Routes/Adminroute";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import AboutUs from "./Pages/AboutUs";
 import Privacy from "./Pages/Privacy";
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import TermsCondition from "./Pages/TermsCondition";
+import Forgotpassword from "./Pages/Auth/Forgotpassword";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      {/* this is protected routes */}
+      <Route path="/dashboard" element={<Userroute />}>
+        <Route path="user" element={<Dashboard />} />
+      </Route>
+      <Route path="/dashboard" element={<Adminroute/>}>
+        <Route path="admin" element={<AdminDashboard/>} />
+      </Route>
+      
       <Route path="/Glasses" element={<Glasses />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/Fitness" element={<Fitness />} />
@@ -27,11 +38,9 @@ function App() {
       <Route path="/contact-us" element={<Contact/>} />
       <Route path="/about-us" element={<AboutUs/>} />
       <Route path="/privacy" element={<Privacy/>} />
+      <Route path="/Forgot-Password" element={<Forgotpassword/>} />
       <Route path="/Terms-and-conditions" element={<TermsCondition/>} />
-      {/* this is protected routes */}
-      <Route path="/dashboard" element={<Privateroute />}>
-        <Route path="" element={<Dashboard />} />
-      </Route>
+      
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

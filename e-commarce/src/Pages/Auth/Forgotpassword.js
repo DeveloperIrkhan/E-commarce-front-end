@@ -1,39 +1,37 @@
 import React, { useState } from "react";
 import Layout from "../../Components/Layout";
-import Spinner from "../../Components/Spinner";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { useNavigate, useLocation, Link } from "react-router-dom";
-import { useAuth } from "../../context/auth";
+import Spinner from "../../Components/Spinner";
 import {
   api_endpoint,
-  endpointforLogin,
+  endPointForForgotPassword,
 } from "../../API_ENDPOINTS/API_endPoints";
 import axios from "axios";
-const Login = () => {
-  const [Username, setUsername] = useState("");
+
+
+const Forgotpassword = () => {
+  const [email, setemail] = useState("");
   const [Loading, setLoading] = useState(false);
-  const [Password, setPassword] = useState("");
-  const [auth, setauth] = useAuth();
+  const [newPassword, setnewPassword] = useState("");
+  const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
   const HandleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     try {
-      const resp = await axios.post(`${api_endpoint}${endpointforLogin}`, {
-        Username,
-        Password,
-      });
+      const resp = await axios.post(
+        `${api_endpoint}${endPointForForgotPassword}`,
+        {
+          email,
+          newPassword,
+          answer
+        }
+      );
       if (resp && resp.data.success) {
         setLoading(false);
-        setauth({
-          ...auth,
-          user: resp.data.user,
-          token: resp.data.token,
-        });
-        localStorage.setItem('auth',JSON.stringify(resp.data))
         toast.success(resp.data && resp.data.message);
-        navigate(location.state || "/");
+        navigate("/Signin");
       } else {
         setLoading(false);
       }
@@ -44,10 +42,11 @@ const Login = () => {
       toast.error("something wrong!");
     }
   };
+
   return (
     <>
       {Loading ? <Spinner /> : ""}
-      <Layout title="Register - e-Bazar">
+      <Layout title="Forgot Password - e-Bazar">
         <div className="container">
           <div className="d-flex justify-content-center align-items-center">
             <form
@@ -55,44 +54,56 @@ const Login = () => {
               onSubmit={HandleSubmit}
             >
               <div className="row mb-5">
-                <h3 className="div-heading">Login</h3>
+                <h3 className="div-heading">Forgot Password</h3>
               </div>
               <div className="form-group my-2">
                 <label htmlFor="email">Email Address</label>
                 <b className="text-danger">*</b>
                 <input
                   type="email"
-                  value={Username}
+                  value={email}
                   className="form-control"
                   id="email"
                   required
                   onChange={(e) => {
-                    setUsername(e.target.value);
+                    setemail(e.target.value);
                   }}
                   placeholder="Enter email"
                 />
               </div>
+             
               <div className="form-group my-2">
-                <label htmlFor="Password">Password</label>
+                <label htmlFor="Password">New Password</label>
                 <b className="text-danger">*</b>
                 <input
                   type="Password"
-                  value={Password}
+                  value={newPassword}
                   className="form-control"
                   id="Password"
                   required
                   onChange={(e) => {
-                    setPassword(e.target.value);
+                    setnewPassword(e.target.value);
                   }}
-                  placeholder="Password"
+                  placeholder="New Password"
                 />
               </div>
-              
+              <div className="form-group my-2">
+                <label htmlFor="answer">What is your First School Name?</label>
+                <b className="text-danger">*</b>
+                <input
+                  type="text"
+                  value={answer}
+                  className="form-control"
+                  id="answer"
+                  required
+                  onChange={(e) => {
+                    setAnswer(e.target.value);
+                  }}
+                  placeholder="What is your First School Name?"
+                />
+              </div>
               <button type="submit" className="btn m-1 btn-primary w-25">
-                Login
-              </button>
-              <button onClick={()=>{navigate("/Forgot-Password")}} type="submit" className="btn m-1 btn-secondary w-25">
-                Forgot Password
+                Reset Password
               </button>
             </form>
           </div>
@@ -102,4 +113,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Forgotpassword;

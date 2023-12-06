@@ -1,4 +1,6 @@
 export const api_endpoint="http://localhost:4040"
 export const endpointforRegister="/auth/register"
 export const endpointforLogin="/auth/Login"
-export const dashboard="/auth/Dashboard"
+export const dashboard="/auth/user-dashboard"
+export const admin_dashboard="/auth/admin-dashboard"
+export const endPointForForgotPassword="/auth/forgot-password"

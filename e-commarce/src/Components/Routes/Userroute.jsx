@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
-import {api_endpoint,dashboard} from '../../API_ENDPOINTS/API_endPoints'
+import { api_endpoint, dashboard } from "../../API_ENDPOINTS/API_endPoints";
 import SpinnerWithCouter from "../SpinnerWithCouter";
-export default function PrivateRoute() {
+export default function Userroute() {
   const [ok, setOk] = useState(false);
   const [auth, setauth] = useAuth();
 
@@ -25,11 +25,7 @@ export default function PrivateRoute() {
       }
     };
 
-    if (auth?.token) {
-      authCheck();
-    } else {
-      console.log("you are not logedin");
-    }
+    if (auth?.token) authCheck();
   }, [auth?.token]);
   return ok ? (
     <Outlet />
