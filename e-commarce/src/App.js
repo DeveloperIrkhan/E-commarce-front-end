@@ -11,12 +11,17 @@ import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 import Userroute from "./Components/Routes/Userroute";
 import Adminroute from "./Components/Routes/Adminroute";
-import Dashboard from "./Pages/Dashboard/Dashboard";
+import Dashboard from "./Pages/User/Dashboard";
 import AboutUs from "./Pages/AboutUs";
 import Privacy from "./Pages/Privacy";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import TermsCondition from "./Pages/TermsCondition";
 import Forgotpassword from "./Pages/Auth/Forgotpassword";
+import CreateProduct from "./Pages/Admin/CreateProduct";
+import CreateCategory from "./Pages/Admin/CreateCategory";
+import UserList from "./Pages/Admin/UserList";
+import UserProfile from "./Pages/User/UserProfile";
+import UserOrder from "./Pages/User/UserOrder";
 
 function App() {
   return (
@@ -25,9 +30,14 @@ function App() {
       {/* this is protected routes */}
       <Route path="/dashboard" element={<Userroute />}>
         <Route path="user" element={<Dashboard />} />
+        <Route path="user/user-profile" element={<UserProfile />} />
+        <Route path="user/user-order" element={<UserOrder />} />
       </Route>
       <Route path="/dashboard" element={<Adminroute/>}>
         <Route path="admin" element={<AdminDashboard/>} />
+        <Route path="admin/create-product" element={<CreateProduct/>} />
+        <Route path="admin/create-category" element={<CreateCategory/>} />
+        <Route path="admin/list-users" element={<UserList/>} />
       </Route>
       
       <Route path="/Glasses" element={<Glasses />} />

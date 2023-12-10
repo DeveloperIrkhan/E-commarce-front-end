@@ -21,6 +21,6 @@ export default function Adminroute() {
     };
     if (auth?.token) authCheck();
   }, [auth?.token]);
-  console.log(ok)
-  return ok ? <Outlet /> : <SpinnerWithCouter />
+  console.log(ok);
+  return ok ? <Outlet /> : <SpinnerWithCouter path="/" />;
 }

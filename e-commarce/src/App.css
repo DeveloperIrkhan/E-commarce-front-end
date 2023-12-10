@@ -54,6 +54,16 @@ a {
   font-family: "Roboto", sans-serif;
   /* font-family: "Satisfy", cursive; */
 }
+.div-sub-heading {
+  padding: 3px 3px;
+  float: left!important;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  /* font-family: "Satisfy", cursive; */
+}
 
 /* ============================================
 ================Spinner CSS================== */

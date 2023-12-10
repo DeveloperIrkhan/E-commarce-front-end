@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const SpinnerWithCouter = ({ message }) => {
+const SpinnerWithCouter = ({ message, path = "signin" }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [timer, settimer] = useState(5);
@@ -9,10 +9,10 @@ const SpinnerWithCouter = ({ message }) => {
     const interval = setInterval(() => {
       settimer((prevValue) => --prevValue);
     }, 1000);
-    timer === 0 && navigate("/signin", { state: location.pathname });
+    timer === 0 && navigate(`${path}`, { state: location.pathname });
     // after timer we have to clean interval var
     return () => clearInterval(interval);
-  }, [timer, navigate, location]);
+  }, [timer, navigate, location, path]);
   return (
     <div
       className="d-flex flex-column justify-content-center align-items-center"
