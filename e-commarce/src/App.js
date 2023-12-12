@@ -22,6 +22,7 @@ import CreateCategory from "./Pages/Admin/CreateCategory";
 import UserList from "./Pages/Admin/UserList";
 import UserProfile from "./Pages/User/UserProfile";
 import UserOrder from "./Pages/User/UserOrder";
+import ShowAllCategories from "./Pages/Admin/ShowAllCategories";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="admin" element={<AdminDashboard/>} />
         <Route path="admin/create-product" element={<CreateProduct/>} />
         <Route path="admin/create-category" element={<CreateCategory/>} />
+        <Route path="admin/show-category" element={<ShowAllCategories/>} />
         <Route path="admin/list-users" element={<UserList/>} />
       </Route>
       

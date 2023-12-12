@@ -5,6 +5,9 @@ const AdminMenu = () => {
   return (
     <div className="text-center">
       <div className="list-group p3">
+        <Link to="/dashboard/admin/show-category" className="list-group-item">
+          All Categories
+        </Link>
         <Link to="/dashboard/admin/create-category" className="list-group-item">
           Create Category
         </Link>

@@ -64,7 +64,18 @@ a {
   font-family: "Roboto", sans-serif;
   /* font-family: "Satisfy", cursive; */
 }
-
+.w-10{
+  max-width: 30%!important;
+}
+.text-primary{
+  color: var(--buttonColor)!important;
+}
+.fontaweome-icons {
+  font-size: 20px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
 /* ============================================
 ================Spinner CSS================== */
 .spinner-container {
@@ -75,7 +86,7 @@ a {
   height: 100%;
   z-index: 9999999999;
   overflow: hidden;
-  background: #fff;
+  background: #b3e8b515;
 }
 .spinner-container img {
   width: 25%;

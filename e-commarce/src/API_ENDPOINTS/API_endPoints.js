@@ -7,10 +7,10 @@ export const endPointForForgotPassword = "/auth/forgot-password";
 
 //category
 export const createCategory = "/category/create-category";
-export const updateCategory = "/category/update-category/:id";
+export const updateCategory = "/category/update-category";
 export const getAllCategories = "/category/categories";
 export const getSingleCategory = "/category/get-category/:slug";
-export const deleteCategory = "/category/delete-category/:id";
+export const deleteCategory = "/category/delete-category";
 //products
 export const createProduct="/product/create-products"
 export const updateProduct="/product/update-product/:pid"
