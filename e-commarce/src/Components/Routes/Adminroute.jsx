@@ -9,7 +9,8 @@ import {
 import SpinnerWithCouter from "../SpinnerWithCouter";
 export default function Adminroute() {
   const [ok, setOk] = useState(false);
-  const [auth, setauth] = useAuth();
+  const [auth] = useAuth();
+
   useEffect(() => {
     const authCheck = async () => {
       const resp = await axios.get(`${api_endpoint}${admin_dashboard}`);
@@ -24,3 +25,10 @@ export default function Adminroute() {
   console.log(ok);
   return ok ? <Outlet /> : <SpinnerWithCouter path="/" />;
 }
+
+// useEffect(() => {
+//   async function fetchData() {
+//     await authCheck();
+//   }
+//   fetchData();
+// }, [auth?.token]);

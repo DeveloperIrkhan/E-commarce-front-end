@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../Components/Layout";
 import { useAuth } from "../context/auth";
 const Home = () => {
-  const [auth, setauth] = useAuth();
+  const [auth] = useAuth();
   return (
     <Layout
       auther={"IrfanShah"}

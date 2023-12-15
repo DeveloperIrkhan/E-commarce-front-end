@@ -9,10 +9,10 @@ import {
   createCategory,
   getAllCategories,
 } from "../../API_ENDPOINTS/API_endPoints";
-import { NavLink } from "react-router-dom";
 import Card from "../../Components/Card";
 import TableView from "../../Components/TableView";
 import CategoryInput from "../../Components/Layouts/Forms/CategoryInput";
+import { FetchAllCategories } from "../../Utiles/api_services";
 const ShowAllCategories = () => {
   const [ViewType, setViewType] = useState("table");
   const [name, setName] = useState("");
@@ -20,15 +20,12 @@ const ShowAllCategories = () => {
   const [categories, setcategories] = useState([]);
   const showAll = async () => {
     setLoading(true);
-    try {
-      const result = await axios.get(`${api_endpoint}${getAllCategories}`);
-      if (result.data) {
+    await FetchAllCategories().then((response) => {
+      if (response?.data) {
         setLoading(false);
-        setcategories(result.data.categories);
+        setcategories(response?.data.categories);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    });
   };
   useEffect(() => {
     showAll();
@@ -42,6 +39,7 @@ const ShowAllCategories = () => {
       if (data?.success) {
         toast.success(`${name} is created successfully!`);
         setLoading(false);
+        setName("");
         showAll();
       } else {
         toast.error(data.message);
@@ -109,7 +107,6 @@ const ShowAllCategories = () => {
             </div>
           )}
         </div>
-        
       </div>
     </Layout>
   );

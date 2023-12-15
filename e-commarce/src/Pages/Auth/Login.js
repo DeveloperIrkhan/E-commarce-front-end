@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../Components/Layout";
 import Spinner from "../../Components/Spinner";
 import { toast } from "react-hot-toast";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import {
   api_endpoint,

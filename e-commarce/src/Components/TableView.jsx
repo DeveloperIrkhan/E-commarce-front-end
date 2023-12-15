@@ -3,21 +3,26 @@ import { Modal } from "antd";
 import CategoryInput from "./Layouts/Forms/CategoryInput";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { api_endpoint, deleteCategory, updateCategory } from "../API_ENDPOINTS/API_endPoints";
+import {
+  api_endpoint,
+  updateCategory,
+} from "../API_ENDPOINTS/API_endPoints";
+import { DeleteCategoryById } from "../Utiles/api_services";
 
 const TableView = ({ categories }) => {
   const [show, setshow] = useState(false);
+  const [deleteModal, setdeleteModal] = useState(false);
   const [selected, setselected] = useState(null);
   const [updatedName, setupdatedName] = useState("");
   const DeleteCategory = async (id) => {
     try {
-      const { data } = await axios.delete(
-        `${api_endpoint}${deleteCategory}/${id}`);
-      if (data.success) {
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
-      }
+      await DeleteCategoryById(id).then((resp) => {
+        if (resp.data.success) {
+          toast.success(resp.data.message);
+        } else {
+          toast.error(resp.data.message);
+        }
+      });
     } catch (error) {
       console.log(error);
       toast.error("something went wrong");
@@ -58,7 +63,7 @@ const TableView = ({ categories }) => {
             return (
               <tr key={category._id}>
                 <td>{index + 1}</td>
-                <th>{category.name}</th>
+                <td>{category.name}</td>
                 <td>
                   <button
                     className="btn"
@@ -73,11 +78,22 @@ const TableView = ({ categories }) => {
                   <button
                     className="btn"
                     onClick={() => {
-                      DeleteCategory(category._id)
+                      setdeleteModal(true);
                     }}
                   >
                     <i className="text-danger mx-1 fa-solid fa-trash"></i>
                   </button>
+                  <Modal
+                    title="Delete Category"
+                    open={deleteModal}
+                    onOk={() => {
+                      DeleteCategory(category._id);
+                      setdeleteModal(false);
+                    }}
+                    onCancel={() => setdeleteModal(false)}
+                  >
+                    <p>Do you want to delete category</p>
+                  </Modal>
                 </td>
               </tr>
             );

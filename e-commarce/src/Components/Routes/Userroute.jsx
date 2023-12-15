@@ -6,7 +6,7 @@ import { api_endpoint, dashboard } from "../../API_ENDPOINTS/API_endPoints";
 import SpinnerWithCouter from "../SpinnerWithCouter";
 export default function Userroute() {
   const [ok, setOk] = useState(false);
-  const [auth, setauth] = useAuth();
+  const [auth] = useAuth();
 
   useEffect(() => {
     const authCheck = async () => {

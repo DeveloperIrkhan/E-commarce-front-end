@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import Spinner from "./Spinner";
 import toast from "react-hot-toast";
@@ -11,9 +11,8 @@ const Header = () => {
   // })
   const [auth, setauth] = useAuth();
   const [loading, setloading] = useState(false);
-  const navigate = useNavigate();
   const handleLogout = () => {
-    navigate('/')
+    window.location.href = "/";
     setloading(true);
     setauth({
       ...auth,
@@ -112,7 +111,8 @@ const Header = () => {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <i className="fa-solid fa-plug-circle-xmark"></i> Electronics
+                      <i className="fa-solid fa-plug-circle-xmark"></i>{" "}
+                      Electronics
                     </a>
                     <ul className="dropdown-menu">
                       <li>
@@ -161,7 +161,7 @@ const Header = () => {
                             <Link
                               to={`/dashboard/${
                                 auth?.user?.role === 1 ? "admin" : "user"
-                              }`}  
+                              }`}
                               className="dropdown-item"
                             >
                               <i className="fa-solid fa-gear"></i> Dashboard

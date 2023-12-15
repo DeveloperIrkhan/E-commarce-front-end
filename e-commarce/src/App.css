@@ -96,6 +96,15 @@ a {
 }
 /* ============================================
 ================NAVBAR CSS================== */
+.list-group-item{
+  transition: .2s ease-in;
+}
+.list-group-item:hover{
+  background-color: var(--buttonColor);
+  color: white;
+}
+/* ============================================
+================NAVBAR CSS================== */
 .logo {
   width: 70px;
   height: 70px;
