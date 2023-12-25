@@ -1,0 +1,235 @@
+import React, { useEffect, useState } from "react";
+import Layout from "../../../Components/Layout";
+import AdminMenu from "../../../Components/Layouts/AdminMenu";
+import { FetchAllCategories } from "../../../Utiles/api_services";
+import { Select } from "antd";
+import { toast } from "react-hot-toast";
+import axios from "axios";
+import Spinner from "../../../Components/Spinner";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  GetSinglePhoto,
+  api_endpoint,
+  getSingleProduct,
+} from "../../../API_ENDPOINTS/API_endPoints";
+
+const UpdateProduct = () => {
+  const navigate = useNavigate();
+  const { Option } = Select;
+  const [categories, setcategories] = useState([]);
+  const [categoryType, setcategory] = useState("");
+  const [name, setName] = useState("");
+  const [description, setdescription] = useState("");
+  const [price, setprice] = useState("");
+  const [quantity, setquantity] = useState("");
+  const [shippingAddress, setshippingAddress] = useState(true);
+  const [photo, setphoto] = useState("");
+  const [Id, setId] = useState("");
+  const [Loading, setLoading] = useState(false);
+  const params = useParams();
+  //getting all categories
+  const getAllCategories = async () => {
+    setLoading(true);
+    await FetchAllCategories().then((response) => {
+      if (response?.data) {
+        setLoading(false);
+        setcategories(response?.data.categories);
+      }
+    });
+  };
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+  //getting single product
+  const getproduct = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        `${api_endpoint}${getSingleProduct}${params.slug}`
+      );
+      setId(data?.product?._id);
+      setName(data?.product?.name);
+      setcategory(data?.product?.categoryType._id);
+      setshippingAddress(data?.product?.shippingAddress);
+      setprice(data?.product?.price);
+      setdescription(data?.product?.description);
+      setquantity(data?.product?.quantity);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error("something went wrong!");
+    }
+  };
+  const handleUpdateFun = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const ProductData = new FormData();
+      ProductData.append("name", name);
+      ProductData.append("description", description);
+      ProductData.append("price", price);
+      ProductData.append("quantity", quantity);
+      ProductData.append("categoryType", categoryType);
+      ProductData.append("shippingAddress", shippingAddress);
+      photo && ProductData.append("photo", photo);
+      const { data } = axios.put(
+        `http://localhost:4040/product/update-product/${Id}`,
+        ProductData
+      );
+
+      if (data?.success) {
+        setLoading(false);
+        toast.error(data?.message);
+      } else {
+        setLoading(false);
+        toast.success(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error("something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    getproduct();
+    //eslint-disable-next-line
+  }, []);
+  return (
+    <Layout title="Update products | e-bazar Dashbaord">
+      {Loading ? <Spinner /> : ""}
+      <div className="container">
+        <div className="row">
+          <div className="col-md-3">
+            <AdminMenu />
+          </div>
+          <div className="col-md-9">
+            <div>
+              <h3 className="div-heading">Update products</h3>
+            </div>
+            <form onSubmit={handleUpdateFun}>
+              <div className="row w-100">
+                <div className="p-2">
+                  <label className="form-label">Update Category</label>
+                  <Select
+                    bordered={false}
+                    placeholder="Select a cetegory"
+                    size="Large"
+                    showSearch
+                    className="form-select mb-3"
+                    onChange={(value) => {
+                      setcategory(value);
+                    }}
+                    value={categoryType.name}
+                  >
+                    {categories?.map((c) => {
+                      return (
+                        <Option key={c._id} value={c._id}>
+                          {c.name}
+                        </Option>
+                      );
+                    })}
+                  </Select>
+                </div>
+                <div className="mb-3">
+                  {/* <label className="form-label">Upload Photo</label> */}
+                  <div className="d-flex justify-content-center align-items-center">
+                    <label className="mx-3 btn btn-primary w-50">
+                      {photo ? photo.name : "Upload Photo"}
+                      <input
+                        type="file"
+                        name="photo"
+                        accept="image/*"
+                        onChange={(e) => setphoto(e.target.files[0])}
+                        hidden
+                      />
+                    </label>
+                  </div>
+                </div>
+                <div className="mb-3">
+                  {photo ? (
+                    <div className="text-center">
+                      <img
+                        src={URL.createObjectURL(photo)}
+                        alt="product Photo"
+                        height={"200px"}
+                        className="img img-responsive"
+                      />
+                    </div>
+                  ) : (
+                    <div className="text-center border rounded w-auto">
+                      <img
+                        src={`${api_endpoint}${GetSinglePhoto}${Id}`}
+                        alt="product Photo"
+                        style={{
+                          height: "200px",
+                          width: "auto",
+                          padding: "1rem",
+                        }}
+                        className="img img-fluid img-responsive"
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className="mb-3 py-2">
+                  <Select
+                    bordered={false}
+                    placeholder="Select Shipping"
+                    size="Large"
+                    showSearch
+                    className="form-select mb-3"
+                    onChange={(value) => setshippingAddress(value)}
+                    value={shippingAddress ? "Yes" : "No"}
+                  >
+                    <Option value="1">Yes</Option>
+                    <Option value="0">No</Option>
+                  </Select>
+                  <input
+                    type="text"
+                    placeholder="Enter Product's Name"
+                    className="form-control my-2"
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    value={name}
+                  />
+                  <textarea
+                    type="text"
+                    placeholder="Enter Product's description"
+                    className="form-control my-2"
+                    onChange={(e) => setdescription(e.target.value)}
+                    required
+                    value={description}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Enter Product's price"
+                    className="form-control my-2"
+                    onChange={(e) => setprice(e.target.value)}
+                    required
+                    value={price}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Enter Product's quantity"
+                    className="form-control my-2"
+                    onChange={(e) => setquantity(e.target.value)}
+                    required
+                    value={quantity}
+                  />
+                </div>
+                <div className="row">
+                  <button className="mx-3 btn btn-primary w-25" type="submit">
+                    <i className="fa fa-save"></i> Update PRODUCT
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+export default UpdateProduct;

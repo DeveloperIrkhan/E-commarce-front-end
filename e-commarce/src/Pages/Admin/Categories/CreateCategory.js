@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Layout from "../../Components/Layout";
-import Spinner from "../../Components/Spinner";
+import Layout from "../../../Components/Layout";
+import Spinner from "../../../Components/Spinner";
 import { toast } from "react-hot-toast";
-import AdminMenu from "../../Components/Layouts/AdminMenu";
+import AdminMenu from "../../../Components/Layouts/AdminMenu";
 import {
   api_endpoint,
   createCategory,
-} from "../../API_ENDPOINTS/API_endPoints";
+} from "../../../API_ENDPOINTS/API_endPoints";
 import axios from "axios";
 const CreateCategory = () => {
   const [Loading, setLoading] = useState(false);

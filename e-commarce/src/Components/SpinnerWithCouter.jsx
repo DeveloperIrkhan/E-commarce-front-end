@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const SpinnerWithCouter = ({ message, path = "signin" }) => {
+const SpinnerWithCouter = ({ message, path = "Signin" }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [timer, settimer] = useState(5);
+  const [timer, settimer] = useState(2);
   useEffect(() => {
     const interval = setInterval(() => {
       settimer((prevValue) => --prevValue);

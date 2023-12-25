@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../Components/Layout";
-import Spinner from "../../Components/Spinner";
+import Layout from "../../../Components/Layout";
+import Spinner from "../../../Components/Spinner";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import AdminMenu from "../../Components/Layouts/AdminMenu";
+import AdminMenu from "../../../Components/Layouts/AdminMenu";
 import {
   api_endpoint,
   createCategory,
   getAllCategories,
-} from "../../API_ENDPOINTS/API_endPoints";
-import Card from "../../Components/Card";
-import TableView from "../../Components/TableView";
-import CategoryInput from "../../Components/Layouts/Forms/CategoryInput";
-import { FetchAllCategories } from "../../Utiles/api_services";
+} from "../../../API_ENDPOINTS/API_endPoints";
+import Card from "../../../Components/Card";
+import TableView from "../../../Components/TableView";
+import CategoryInput from "../../../Components/Layouts/Forms/CategoryInput";
+import { FetchAllCategories } from "../../../Utiles/api_services";
 const ShowAllCategories = () => {
   const [ViewType, setViewType] = useState("table");
   const [name, setName] = useState("");

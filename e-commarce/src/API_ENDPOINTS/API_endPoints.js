@@ -13,8 +13,8 @@ export const getSingleCategory = "/category/get-category/:slug";
 export const deleteCategory = "/category/delete-category";
 //products
 export const createProduct="/product/create-products"
-export const updateProduct="/product/update-product/:pid"
+export const updateProduct="/product/update-product"
 export const getAllProducts="/product/getAll-products"
-export const getSingleProduct="/product/get-product/:slug"
-export const deleteSingleProductPhoto="/product/getProduct-photo/:pid"
-export const deleteSingleProduct="/product/delete-product/:pid"
+export const singleProduct="/product/get-product/"
+export const GetSinglePhoto="/product/getProduct-photo/"
+export const deleteSingleProduct="/product/delete-product/"

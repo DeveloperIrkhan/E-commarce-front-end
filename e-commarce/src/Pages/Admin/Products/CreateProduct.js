@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../Components/Layout";
-import AdminMenu from "../../Components/Layouts/AdminMenu";
-import { FetchAllCategories } from "../../Utiles/api_services";
+import Layout from "../../../Components/Layout";
+import AdminMenu from "../../../Components/Layouts/AdminMenu";
+import { FetchAllCategories } from "../../../Utiles/api_services";
 import { Select } from "antd";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import Spinner from "../../Components/Spinner";
-import { api_endpoint, createProduct } from "../../API_ENDPOINTS/API_endPoints";
+import Spinner from "../../../Components/Spinner";
+import {
+  api_endpoint,
+  createProduct,
+} from "../../../API_ENDPOINTS/API_endPoints";
 
 const CreateProduct = () => {
   const { Option } = Select;
@@ -50,6 +53,12 @@ const CreateProduct = () => {
       if (data?.success) {
         setLoading(false);
         toast.error(data?.message);
+        name("");
+        setcategory("");
+        setdescription("");
+        setquantity("");
+        setshippingAddress(false);
+        setphoto("");
       } else {
         toast.success("product added successfully");
         setLoading(false);
